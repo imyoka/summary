@@ -48,7 +48,7 @@ set -e
 #  - GitHub branch to use.  Use master for latest release -
 #  --------------------------------------------------------
 #  For versions <=5.0 or >=6.0 the Unicorn Gem is used, 5.1-5.9 uses Puma, if you used master Unicorn is required.
-gitlab_release=7-4-stable
+gitlab_release=5-1-stable
 #
 #  -------------------------------------------------------
 #  - Unicorn or Puma, Puma default, set to 1 for Unicorn -
@@ -396,7 +396,7 @@ sudo -u git -H bundle exec rake gitlab:setup RAILS_ENV=production
 #  = GitLab Init Script =
 #  ======================
 #
-sudo curl --output /etc/init.d/gitlab https://raw.githubusercontent.com/gitlabhq/gitlabhq/7-4-stable/lib/support/init.d/gitlab
+sudo curl --output /etc/init.d/gitlab https://raw.githubusercontent.com/gitlabhq/gitlabhq/5-1-stable/lib/support/init.d/gitlab
 sudo chmod +x /etc/init.d/gitlab
 
 # Set GitLab to start on boot
@@ -424,7 +424,8 @@ fi
 #  =================
 echo -e "\n[iGitLab] Attempting to install Nginx ..."
 sudo apt-get install $aptget_arguments nginx
-sudo curl --output /etc/nginx/sites-available/gitlab https://raw.github.com/gitlabhq/gitlabhq/6-5-stable/lib/support/nginx/gitlab
+cd /etc/nginx/sites-available/gitlab
+sudo wget https://raw.github.com/gitlabhq/gitlabhq/5-1-stable/lib/support/nginx/gitlab
 sudo ln -s /etc/nginx/sites-available/gitlab /etc/nginx/sites-enabled/gitlab
 
 # 5-3-stable and prior has YOUR_SERVER_IP in nginx conf, post 5-3-stable does not
