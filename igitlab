@@ -390,6 +390,7 @@ sudo -u git -H bundle exec rake gitlab:shell:install[$gitlab_shell_release] REDI
 #  ================================================
 #  = Initialize DB and Activate Advanced Features =
 #  ================================================
+sudo -u git -H bundle exec rake assets:precompile RAILS_ENV=production 
 sudo -u git -H bundle exec rake gitlab:setup RAILS_ENV=production
 
 #  ======================
