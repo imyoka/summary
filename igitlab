@@ -248,6 +248,12 @@ make --silent
 echo -e "\n[iGitLab] Installing Ruby..."
 sudo make install --silent
 
+# Update Gem sources
+gem sources -a http://ruby.taobao.org/
+gem sources -r http://rubygems.org/
+gem sources -r https://rubygems.org/
+gem sources -u
+
 # Bundler Gem (-q for quiet)
 echo -e "\n[iGitLab] Installing Bundler Gem..."
 sudo gem install bundler --no-ri --no-rdoc -q
@@ -363,10 +369,6 @@ sudo -u git -H chmod o-rwx config/database.yml
 #  = GitLab Gems Install =
 #  =======================
 #
-gem sources -a http://ruby.taobao.org/
-gem sources -r http://rubygems.org/
-gem sources -r https://rubygems.org/
-gem sources -u
 sed -i 's/https:\/\/rubygems.org/http:\/\/ruby.taobao.org/g' /home/git/gitlab/Gemfile
 
 cd /home/git/gitlab
