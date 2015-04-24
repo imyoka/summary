@@ -364,6 +364,7 @@ sudo -u git -H chmod o-rwx config/database.yml
 #  =======================
 #
 gem sources -a http://ruby.taobao.org/
+gem sources -r http://rubygems.org/
 gem sources -r https://rubygems.org/
 gem sources -u
 sed -i 's/https:\/\/rubygems.org/http:\/\/ruby.taobao.org/g' /home/git/gitlab/Gemfile
