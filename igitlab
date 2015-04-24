@@ -58,7 +58,7 @@ useunicorn=1
 #  --------------------------------------
 #  - Version of GitLab Shell to install -
 #  --------------------------------------
-gitlab_shell_release=v2.1.0
+gitlab_shell_release=v2.0.1
 #
 #  -------------------------------------
 #  - Download URL for Ruby tar.gz file -
@@ -73,7 +73,7 @@ rubydlurl="ftp://ftp.ruby-lang.org/pub/ruby/2.1/ruby-2.1.2.tar.gz"
 mysqlpasswd=""
 #
 #  ------------------------------
-#  - Optional apt-get arguments -
+#  - Optional aptitude arguments -
 #  ------------------------------
 #  -s = simulate
 #  -y = yes (no prompt)
@@ -156,9 +156,9 @@ givemeayes "Would you like to continue with the install? (y/n)"
 #  ====================
 #
 msgnl "[iGitLab] Updating package information..."
-sudo apt-get update $aptget_arguments
+sudo aptitude update $aptget_arguments
 msgnl "Installing required packages, please wait this could take a minute..."
-sudo apt-get install $aptget_arguments build-essential zlib1g-dev libyaml-dev libssl-dev libgdbm-dev libreadline-dev libncurses5-dev libffi-dev curl wget git-core openssh-server redis-server checkinstall libxml2-dev libxslt-dev libcurl4-openssl-dev libicu-dev logrotate cmake 1>>$APTLOG 2>>$APTERRLOG || (echo "apt-get install failed, check APTLOG and APTERRLOG" ; exit)
+sudo aptitude install $aptget_arguments build-essential zlib1g-dev libyaml-dev libssl-dev libgdbm-dev libreadline-dev libncurses5-dev libffi-dev curl wget git-core openssh-server redis-server checkinstall libxml2-dev libxslt-dev libcurl4-openssl-dev libicu-dev logrotate cmake 1>>$APTLOG 2>>$APTERRLOG || (echo "aptitude install failed, check APTLOG and APTERRLOG" ; exit)
 
 #  ======================
 #  = MySQL Installation =
@@ -166,7 +166,7 @@ sudo apt-get install $aptget_arguments build-essential zlib1g-dev libyaml-dev li
 #
 
 # Install the database packages
-sudo apt-get install $aptget_arguments mysql-server mysql-client libmysqlclient-dev
+sudo aptitude install $aptget_arguments mysql-server mysql-client libmysqlclient-dev
 
 # Check for MySQL root password
 if [ -z "$mysqlpasswd" ]; then
@@ -209,13 +209,13 @@ mysql -uroot -p$mysqlpasswd -e "\\q;"
 #  =======================
 #
 echo -e "\n[iGitLab] Installing Python..."
-sudo apt-get install $aptget_arguments python
+sudo aptitude install $aptget_arguments python
 
 # Make sure that Python is 2.x (3.x is not supported at the moment)
 python --version
 
 # If it's Python 3 you might need to install Python 2 separately
-sudo apt-get install $aptget_arguments python2.7 python-docutils
+sudo aptitude install $aptget_arguments python2.7 python-docutils
 
 # Make sure you can access Python via python2
 python2 --version
@@ -229,7 +229,7 @@ fi
 #  = Postfix Install =
 #  ===================
 #
-sudo DEBIAN_FRONTEND='noninteractive' apt-get install $aptget_arguments postfix-policyd-spf-python postfix # Install postfix without prompting.
+sudo DEBIAN_FRONTEND='noninteractive' aptitude install $aptget_arguments postfix-policyd-spf-python postfix # Install postfix without prompting.
 
 #  =====================
 #  = Ruby Installation =
@@ -237,7 +237,7 @@ sudo DEBIAN_FRONTEND='noninteractive' apt-get install $aptget_arguments postfix-
 #
 # Remove Ruby1.8 if installed
 echo -e "\n[iGitLab] Removing Ruby1.8 if installed..."
-sudo apt-get remove $aptget_arguments ruby1.8
+sudo aptitude remove $aptget_arguments ruby1.8
 echo -e "\n[iGitLab] Downloading $rubydlurl..."
 curl --progress-bar $rubydlurl | tar xz
 cd ruby-*
@@ -424,7 +424,7 @@ fi
 #  = Install Nginx =
 #  =================
 echo -e "\n[iGitLab] Attempting to install Nginx ..."
-sudo apt-get install $aptget_arguments nginx
+sudo aptitude install $aptget_arguments nginx
 cd /etc/nginx/sites-available/
 sudo wget https://raw.github.com/gitlabhq/gitlabhq/7-4-stable/lib/support/nginx/gitlab
 sudo ln -s /etc/nginx/sites-available/gitlab /etc/nginx/sites-enabled/gitlab
