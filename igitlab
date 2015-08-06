@@ -80,7 +80,7 @@ mysqlpasswd=""
 #  -q = quiet
 #  -qq = even more quiet (also implies -y, do not use with -s)
 #  ------------------------------
-aptget_arguments="-qq"
+aptget_arguments="-y"
 APTLOG=apt.log
 APTERRLOG=apterror.log
 
@@ -238,6 +238,9 @@ sudo DEBIAN_FRONTEND='noninteractive' aptitude install $aptget_arguments postfix
 # Remove Ruby1.8 if installed
 echo -e "\n[iGitLab] Removing Ruby1.8 if installed..."
 sudo aptitude remove $aptget_arguments ruby1.8
+# Remove Ruby1.9.1 if installed
+echo -e "\n[iGitLab] Removing Ruby1.9.1 if installed..."
+sudo aptitude remove $aptget_arguments ruby1.9.1
 echo -e "\n[iGitLab] Downloading $rubydlurl..."
 curl --progress-bar $rubydlurl | tar xz
 cd ruby-*
